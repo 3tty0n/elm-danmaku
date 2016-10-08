@@ -9,4 +9,3 @@ main =
 
 view _ =
     toHtml (tiledImage 10000 10000 "http://aikatsup.com/media/images/2157.jpeg")
-
