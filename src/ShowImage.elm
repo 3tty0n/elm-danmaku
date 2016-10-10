@@ -31,11 +31,17 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
         MoveImage ->
-            ( model, Random.generate OnResult (Random.float 10 50))
+            ( model
+            , Random.generate OnResult (Random.float 10 50)
+            )
         Reset ->
-            ( { model | image = makeImage }, Cmd.none )
-        OnResult x ->
-            ( { model | image = makeCollage x (x + 50) }, Cmd.none )
+            ( { model | image = makeImage }
+            , Cmd.none
+            )
+        OnResult x u->
+            ( { model | image = makeCollage x (x + 50) }
+            , Cmd.none
+            )
 
 subscriptions: Model -> Sub msg
 subscriptions model =
