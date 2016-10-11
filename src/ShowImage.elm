@@ -21,7 +21,6 @@ type alias Model =
 type Msg =
     MoveImage
     | OnResult Float
-    | Reset
 
 init : (Model, Cmd Msg)
 init =
@@ -32,15 +31,11 @@ update msg model =
     case msg of
         MoveImage ->
             ( model
-            , Random.generate OnResult (Random.float 10 50)
+            , Random.generate OnResult (Random.float 10 20)
             )
-        Reset ->
-            ( { model | image = makeImage }
-            , Cmd.none
-            )
-        OnResult x u->
-            ( { model | image = makeCollage x (x + 50) }
-            , Cmd.none
+        OnResult x ->
+            ( { model | image = makeCollage x (x + 30) }
+            , Random.generate OnResult (Random.float 40 90)
             )
 
 subscriptions: Model -> Sub msg
@@ -51,8 +46,7 @@ view : Model -> Html Msg
 view model =
     div []
         [ button [ onClick (MoveImage)] [ Html.text "Rotate" ]
-        , button [ onClick (Reset)] [ Html.text "Reset" ]
-        , toHtml model.image
+        , div [] [ toHtml model.image ]
         ]
 
 makeImage : Element

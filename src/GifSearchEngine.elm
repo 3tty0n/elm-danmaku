@@ -20,12 +20,12 @@ main =
 type alias Model =
     { topic: String
     , input: String
-    , gifUrl : String
+    , gifUrl : List String
     }
 
 init : (Model, Cmd Msg)
 init =
-    ( Model "aikatsu" "" "waiting.gif"
+    ( Model "aikatsu" "" [""]
     , getRandomGif "aikatsu"
     )
 
@@ -42,7 +42,7 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
         FetchSucceed newUrl ->
-            (Model model.topic model.input newUrl, Cmd.none)
+            (Model model.topic model.input (newUrl :: model.gifUrl), Cmd.none)
         FetchFail _ ->
             (model, Cmd.none)
         Input newInput ->
@@ -59,11 +59,16 @@ view : Model -> Html Msg
 view model =
     div []
         [ h1 [] [ text "Gif Search Engine" ]
-        , img [ src model.gifUrl] []
         , div []
             [ input  [ onInput Input, value model.input ] []
             , button [ onClick Send ] [ text "Send" ] ]
+        , listImage model
         ]
+listImage model =
+    let
+        toList a = img [ src a ] []
+    in
+        div [] <| List.map toList model.gifUrl
 
 -- SUBSCRIPTIONS
 
