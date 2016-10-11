@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="UTF-8"><title>Main</title><style>html,head,body { padding:0; margin:0; }
+<html><head><meta charset="UTF-8"><title>Gif Search Engine</title><style>html,head,body { padding:0; margin:0; }
 body { font-family: calibri, helvetica, arial, sans-serif; }</style><script type="text/javascript">
 (function() {
 'use strict';
@@ -9209,6 +9209,23 @@ var _user$project$Main$decodeGifUrl = A2(
 	_elm_lang$core$Native_List.fromArray(
 		['data', 'image_url']),
 	_elm_lang$core$Json_Decode$string);
+var _user$project$Main$listImage = function (model) {
+	var toList = function (a) {
+		return A2(
+			_elm_lang$html$Html$img,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$src(a)
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[]));
+	};
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		A2(_elm_lang$core$List$map, toList, model.gifUrl));
+};
 var _user$project$Main$Model = F3(
 	function (a, b, c) {
 		return {topic: a, input: b, gifUrl: c};
@@ -9239,14 +9256,6 @@ var _user$project$Main$view = function (model) {
 						_elm_lang$html$Html$text('Gif Search Engine')
 					])),
 				A2(
-				_elm_lang$html$Html$img,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$src(model.gifUrl)
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[])),
-				A2(
 				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
 					[]),
@@ -9271,7 +9280,8 @@ var _user$project$Main$view = function (model) {
 							[
 								_elm_lang$html$Html$text('Send')
 							]))
-					]))
+					])),
+				_user$project$Main$listImage(model)
 			]));
 };
 var _user$project$Main$FetchFail = function (a) {
@@ -9290,7 +9300,12 @@ var _user$project$Main$getRandomGif = function (topic) {
 };
 var _user$project$Main$init = {
 	ctor: '_Tuple2',
-	_0: A3(_user$project$Main$Model, 'aikatsu', '', 'waiting.gif'),
+	_0: A3(
+		_user$project$Main$Model,
+		'aikatsu',
+		'',
+		_elm_lang$core$Native_List.fromArray(
+			[''])),
 	_1: _user$project$Main$getRandomGif('aikatsu')
 };
 var _user$project$Main$update = F2(
@@ -9300,7 +9315,11 @@ var _user$project$Main$update = F2(
 			case 'FetchSucceed':
 				return {
 					ctor: '_Tuple2',
-					_0: A3(_user$project$Main$Model, model.topic, model.input, _p0._0),
+					_0: A3(
+						_user$project$Main$Model,
+						model.topic,
+						model.input,
+						A2(_elm_lang$core$List_ops['::'], _p0._0, model.gifUrl)),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'FetchFail':
