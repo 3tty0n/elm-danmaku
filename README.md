@@ -4,7 +4,7 @@ This is a sandbox for elm-lang.
 ## Install
 
 ```
-$ elm-package Install
+$ elm-package install
 ```
 
 ## Usage
