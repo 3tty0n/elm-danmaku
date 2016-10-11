@@ -42,13 +42,13 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
         FetchSucceed newUrl ->
-            (Model model.topic "" newUrl, Cmd.none)
+            (Model model.topic model.input newUrl, Cmd.none)
         FetchFail _ ->
             (model, Cmd.none)
         Input newInput ->
             (Model model.topic newInput model.gifUrl, Cmd.none)
         Send ->
-            (Model model.topic "" model.gifUrl, WebSocket.send echoServer model.input)
+            (model, WebSocket.send echoServer model.input)
         NewMessage str ->
             (model, getRandomGif str)
 
