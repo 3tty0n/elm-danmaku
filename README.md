@@ -13,3 +13,6 @@ $ elm-package install
 $ elm-make src/<filename>
 $ open index.Html
 ```
+
+## Demo
+![](media/demo.gif)
