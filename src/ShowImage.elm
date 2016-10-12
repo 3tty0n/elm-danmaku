@@ -1,6 +1,8 @@
+import Animation exposing (..)
 import Element exposing (..)
 import Collage exposing (..)
 import Text exposing (..)
+import Time exposing (..)
 import Html exposing (..)
 import Html.App exposing (program)
 import Html.Attributes exposing (src)
@@ -20,7 +22,9 @@ type alias Model =
 
 type Msg =
     MoveImage
+    | Reset
     | OnResult Float
+    | Tick Time
 
 init : (Model, Cmd Msg)
 init =
@@ -31,21 +35,30 @@ update msg model =
     case msg of
         MoveImage ->
             ( model
-            , Random.generate OnResult (Random.float 10 20)
+            , Random.generate OnResult (Random.float 10 90)
+            )
+        Reset ->
+            ( Model makeImage
+            , Cmd.none
             )
         OnResult x ->
             ( { model | image = makeCollage x (x + 30) }
-            , Random.generate OnResult (Random.float 40 90)
+            , Cmd.none
+            )
+        Tick newTime ->
+            ( { model | image = makeCollage (inMilliseconds newTime) (inSeconds newTime)}
+            , Cmd.none
             )
 
-subscriptions: Model -> Sub msg
+subscriptions: Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    every second Tick
 
 view : Model -> Html Msg
 view model =
     div []
-        [ button [ onClick (MoveImage)] [ Html.text "Rotate" ]
+        [ button [ onClick (MoveImage) ] [ Html.text "Rotate" ]
+        , button [ onClick (Reset) ] [ Html.text "Reset" ]
         , div [] [ toHtml model.image ]
         ]
 
