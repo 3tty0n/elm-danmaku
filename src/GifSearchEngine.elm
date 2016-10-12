@@ -60,11 +60,11 @@ view model =
     div []
         [ h1 [] [ text "Gif Search Engine" ]
         , div []
-            [ input  [ onInput Input, value model.input ] []
+            [ input  [ placeholder "English Only" ,onInput Input, value model.input ] [ ]
             , button [ onClick Send ] [ text "Send" ] ]
         , listImage model
         ]
-        
+
 listImage model =
     let
         toList a = img [ src a ] []
