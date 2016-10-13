@@ -46,13 +46,13 @@ update msg model =
             , Cmd.none
             )
         Tick newTime ->
-            ( { model | image = makeCollage ((inMilliseconds newTime) * 2) ((inSeconds newTime) * 5) }
+            ( { model | image = makeCollage (inMilliseconds newTime) ((inSeconds newTime) * 10) }
             , Cmd.none
             )
 
 subscriptions: Model -> Sub Msg
 subscriptions model =
-    every second Tick
+    every millisecond Tick
 
 view : Model -> Html Msg
 view model =
@@ -68,4 +68,4 @@ makeImage =
 
 makeCollage : Float -> Float -> Element
 makeCollage i j =
-    collage 500 500 [rotate (degrees i) (toForm makeImage), rotate (degrees j) (toForm makeImage)]
+    collage 500 500 [rotate (degrees i) (toForm makeImage), rotate (degrees j - 10) (toForm makeImage)]
