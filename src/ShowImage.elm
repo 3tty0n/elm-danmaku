@@ -35,7 +35,7 @@ update msg model =
     case msg of
         MoveImage ->
             ( model
-            , Random.generate OnResult (Random.float 10 90)
+            , Random.generate OnResult (Random.float 10 50)
             )
         Reset ->
             ( Model makeImage
@@ -46,7 +46,7 @@ update msg model =
             , Cmd.none
             )
         Tick newTime ->
-            ( { model | image = makeCollage (inMilliseconds newTime) (inSeconds newTime)}
+            ( { model | image = makeCollage ((inMilliseconds newTime) * 2) ((inSeconds newTime) * 5) }
             , Cmd.none
             )
 

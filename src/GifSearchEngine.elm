@@ -76,6 +76,12 @@ listImage model =
     in
         div [] <| List.map toList model.gifUrl
 
+listImage model =
+    let
+        toList a = img [ src a ] []
+    in
+        div [] <| List.map toList model.gifUrl
+
 -- SUBSCRIPTIONS
 
 subscriptions : Model -> Sub Msg
