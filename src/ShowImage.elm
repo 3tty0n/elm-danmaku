@@ -21,10 +21,7 @@ type alias Model =
     { image: Element }
 
 type Msg =
-    MoveImage
-    | Reset
-    | OnResult Float
-    | Tick Time
+    Tick Time
 
 init : (Model, Cmd Msg)
 init =
@@ -33,20 +30,9 @@ init =
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
-        MoveImage ->
-            ( model
-            , Random.generate OnResult (Random.float 10 50)
-            )
-        Reset ->
-            ( Model makeImage
-            , Cmd.none
-            )
-        OnResult x ->
-            ( { model | image = makeCollage x (x + 30) }
-            , Cmd.none
-            )
         Tick newTime ->
-            ( { model | image = makeCollage (inMilliseconds newTime) ((inSeconds newTime) * 10) }
+            ( Model (collage 800 800 [ rotate (degrees (inMilliseconds newTime)) (toForm makeImage)
+            ,  rotate (degrees ((inMilliseconds newTime) / 10) + 45) (toForm makeImage) ])
             , Cmd.none
             )
 
@@ -57,15 +43,13 @@ subscriptions model =
 view : Model -> Html Msg
 view model =
     div []
-        [ button [ onClick (MoveImage) ] [ Html.text "Rotate" ]
-        , button [ onClick (Reset) ] [ Html.text "Reset" ]
-        , div [] [ toHtml model.image ]
+        [ div [] [ toHtml model.image ]
         ]
 
 makeImage : Element
 makeImage =
-    image 500 500 "http://aikatsup.com/media/images/2157.jpeg"
+    image 800 800 "http://aikatsup.com/media/images/2157.jpeg"
 
 makeCollage : Float -> Float -> Element
 makeCollage i j =
-    collage 500 500 [rotate (degrees i) (toForm makeImage), rotate (degrees j - 10) (toForm makeImage)]
+    collage 800 800 [rotate (degrees i) (toForm makeImage), rotate (degrees j - 10) (toForm makeImage)]
