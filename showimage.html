@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="UTF-8"><title>Image Rotation</title><style>html,head,body { padding:0; margin:0; }
+<html><head><meta charset="UTF-8"><title>Image Rotating Animation</title><style>html,head,body { padding:0; margin:0; }
 body { font-family: calibri, helvetica, arial, sans-serif; }</style><script type="text/javascript">
 (function() {
 'use strict';
@@ -11702,7 +11702,7 @@ var _user$project$Main$update = F2(
 					_1: A2(
 						_elm_lang$core$Random$generate,
 						_user$project$Main$OnResult,
-						A2(_elm_lang$core$Random$float, 10, 90))
+						A2(_elm_lang$core$Random$float, 10, 50))
 				};
 			case 'Reset':
 				return {
@@ -11730,8 +11730,8 @@ var _user$project$Main$update = F2(
 						{
 							image: A2(
 								_user$project$Main$makeCollage,
-								_elm_lang$core$Time$inMilliseconds(_p2),
-								_elm_lang$core$Time$inSeconds(_p2))
+								_elm_lang$core$Time$inMilliseconds(_p2) * 2,
+								_elm_lang$core$Time$inSeconds(_p2) * 5)
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
