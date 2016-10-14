@@ -9,7 +9,9 @@ import Html.Events exposing (..)
 import Json.Decode as Json
 import WebSocket
 
+
 -- MODEL
+
 
 type alias Model =
     { input: String
@@ -27,35 +29,48 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
         Input newInput ->
-            (Model newInput model.database, Cmd.none)
+            ( Model newInput []
+            , Cmd.none
+            )
 
         Send ->
             let
-                newElements = leftAligned (fromString model.input)
+                newElement = collage 100 100 [(Collage.text (fromString model.input))]
             in
-                (Model "" (newElements :: model.database), Cmd.none)
+                ( Model "" (newElement :: model.database)
+                , Cmd.none
+                )
+
 
         Tick newTime ->
             let
                 ms = inMilliseconds newTime
             in
-                (Model model.input (movedElements ms model.database), Cmd.none)
+                ( Model model.input (movedElements ms model.database)
+                , Cmd.none
+                )
+
 
 moveElement : Float -> Element -> Element
 moveElement ms element =
-    show (moveX (ms / 50) (toForm element))
+    collage 500 500 [(moveX (ms / 1000000000000) (toForm element))]
+
 
 movedElements : Float -> List Element -> List Element
 movedElements ms elements =
    List.map (moveElement ms) elements
 
+
 -- SUBSCRIPTIONS
+
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
     every millisecond Tick
 
+
 -- VIEW
+
 
 view : Model -> Html Msg
 view model =
