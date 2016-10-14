@@ -15,15 +15,18 @@ import WebSocket
 
 type alias Model =
     { input: String
-    , database: List Element
+    , database: List Form
     }
 
+
 -- UPDATE
+
 
 type Msg =
     Input String
     | Send
     | Tick Time
+
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -35,9 +38,9 @@ update msg model =
 
         Send ->
             let
-                newElement = collage 100 100 [(Collage.text (fromString model.input))]
+                newForm = Collage.text (fromString model.input)
             in
-                ( Model "" (newElement :: model.database)
+                ( Model "" (newForm :: model.database)
                 , Cmd.none
                 )
 
@@ -46,19 +49,19 @@ update msg model =
             let
                 ms = inMilliseconds newTime
             in
-                ( Model model.input (movedElements ms model.database)
+                ( Model model.input (movedForms ms model.database)
                 , Cmd.none
                 )
 
 
-moveElement : Float -> Element -> Element
-moveElement ms element =
-    collage 500 500 [(moveX (ms / 1000000000000) (toForm element))]
+moveForm : Float -> Form -> Form
+moveForm ms form =
+    moveX (ms / 2000000000000) (form)
 
 
-movedElements : Float -> List Element -> List Element
-movedElements ms elements =
-   List.map (moveElement ms) elements
+movedForms : Float -> List Form -> List Form
+movedForms ms forms =
+   List.map (moveForm ms) forms
 
 
 -- SUBSCRIPTIONS
@@ -78,8 +81,13 @@ view model =
         [ h1 [] [ text "Elm Danmaku" ]
         , textField model.input
         , button [ onClick Send ] [ text "Send" ]
-        , toHtml (layers model.database)
+        , viewCollage model.database
         ]
+
+
+viewCollage : List Form -> Html msg
+viewCollage forms =
+    toHtml (collage 800 800 forms)
 
 
 textField : String -> Html Msg
