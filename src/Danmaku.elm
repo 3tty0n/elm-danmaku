@@ -29,7 +29,7 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
         Input newInput ->
-            ( Model newInput []
+            ( Model newInput model.database
             , Cmd.none
             )
 
@@ -78,11 +78,9 @@ view model =
         [ h1 [] [ text "Elm Danmaku" ]
         , textField model.input
         , button [ onClick Send ] [ text "Send" ]
-        , toList model
+        , toHtml (layers model.database)
         ]
 
-toList model =
-    div [] <| List.map toHtml model.database
 
 textField : String -> Html Msg
 textField str =
