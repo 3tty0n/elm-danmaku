@@ -40,10 +40,9 @@ update msg model =
             let
                 newForm = Collage.text (fromString model.input)
             in
-                ( Model "" (newForm :: model.database)
+                ( Model model.input (newForm :: model.database)
                 , Cmd.none
                 )
-
 
         Tick newTime ->
             let
@@ -56,12 +55,17 @@ update msg model =
 
 moveForm : Float -> Form -> Form
 moveForm ms form =
-    moveX (ms / 2000000000000) (form)
+    moveX (ms / 1000000000000) (form)
 
 
 movedForms : Float -> List Form -> List Form
 movedForms ms forms =
    List.map (moveForm ms) forms
+
+
+makeImage : Element
+makeImage =
+    image 1000 800 "https://media.giphy.com/media/coKVIxlpTXpXq/giphy.gif"
 
 
 -- SUBSCRIPTIONS
@@ -87,7 +91,7 @@ view model =
 
 viewCollage : List Form -> Html msg
 viewCollage forms =
-    toHtml (collage 800 800 forms)
+    toHtml (collage 1000 500 ((toForm makeImage) :: forms))
 
 
 textField : String -> Html Msg
