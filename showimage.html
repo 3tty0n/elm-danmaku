@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="UTF-8"><title>Main</title><style>html,head,body { padding:0; margin:0; }
+<html><head><meta charset="UTF-8"><title>Image Rotating Animation</title><style>html,head,body { padding:0; margin:0; }
 body { font-family: calibri, helvetica, arial, sans-serif; }</style><script type="text/javascript">
 (function() {
 'use strict';
@@ -4379,7 +4379,7 @@ function endsWith(sub, str)
 function indexes(sub, str)
 {
 	var subLen = sub.length;
-	
+
 	if (subLen < 1)
 	{
 		return _elm_lang$core$Native_List.Nil;
@@ -4392,8 +4392,8 @@ function indexes(sub, str)
 	{
 		is.push(i);
 		i = i + subLen;
-	}	
-	
+	}
+
 	return _elm_lang$core$Native_List.fromArray(is);
 }
 
@@ -11655,6 +11655,7 @@ var _mgold$elm_animation$Animation$to = F2(
 				_p61._0,
 				{to: x, ramp: _elm_lang$core$Maybe$Nothing}));
 	});
+var _user$project$Main$makeImage2 = A3(_evancz$elm_graphics$Element$image, 400, 400, 'http://aikatsup.com/media/images/2151.jpeg');
 var _user$project$Main$makeImage = A3(_evancz$elm_graphics$Element$image, 800, 800, 'http://aikatsup.com/media/images/2157.jpeg');
 var _user$project$Main$makeCollage = F2(
 	function (i, j) {
@@ -11715,13 +11716,13 @@ var _user$project$Main$update = F2(
 							A2(
 							_evancz$elm_graphics$Collage$rotate,
 							_elm_lang$core$Basics$degrees(
-								_elm_lang$core$Time$inMilliseconds(_p1)),
+								_elm_lang$core$Time$inMilliseconds(_p1) / 2),
 							_evancz$elm_graphics$Collage$toForm(_user$project$Main$makeImage)),
 							A2(
 							_evancz$elm_graphics$Collage$rotate,
 							_elm_lang$core$Basics$degrees(
 								_elm_lang$core$Time$inMilliseconds(_p1) / 10) + 45,
-							_evancz$elm_graphics$Collage$toForm(_user$project$Main$makeImage))
+							_evancz$elm_graphics$Collage$toForm(_user$project$Main$makeImage2))
 						]))),
 			_1: _elm_lang$core$Platform_Cmd$none
 		};
