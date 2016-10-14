@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="UTF-8"><title>Main</title><style>html,head,body { padding:0; margin:0; }
+<html><head><meta charset="UTF-8"><title>Danmaku</title><style>html,head,body { padding:0; margin:0; }
 body { font-family: calibri, helvetica, arial, sans-serif; }</style><script type="text/javascript">
 (function() {
 'use strict';
@@ -11533,13 +11533,21 @@ var _evancz$elm_graphics$Collage$ngon = F2(
 				f,
 				_elm_lang$core$Native_List.range(0, m - 1)));
 	});
+var _user$project$Main$makeImage = A3(_evancz$elm_graphics$Element$image, 1000, 800, 'https://media.giphy.com/media/coKVIxlpTXpXq/giphy.gif');
 var _user$project$Main$viewCollage = function (forms) {
 	return _evancz$elm_graphics$Element$toHtml(
-		A3(_evancz$elm_graphics$Collage$collage, 800, 800, forms));
+		A3(
+			_evancz$elm_graphics$Collage$collage,
+			1000,
+			500,
+			A2(
+				_elm_lang$core$List_ops['::'],
+				_evancz$elm_graphics$Collage$toForm(_user$project$Main$makeImage),
+				forms)));
 };
 var _user$project$Main$moveForm = F2(
 	function (ms, form) {
-		return A2(_evancz$elm_graphics$Collage$moveX, ms / 2000000000000, form);
+		return A2(_evancz$elm_graphics$Collage$moveX, ms / 1000000000000, form);
 	});
 var _user$project$Main$movedForms = F2(
 	function (ms, forms) {
@@ -11569,7 +11577,7 @@ var _user$project$Main$update = F2(
 					ctor: '_Tuple2',
 					_0: A2(
 						_user$project$Main$Model,
-						'',
+						model.input,
 						A2(_elm_lang$core$List_ops['::'], newForm, model.database)),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
