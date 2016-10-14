@@ -31,8 +31,8 @@ update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
         Tick newTime ->
-            ( Model (collage 800 800 [ rotate (degrees (inMilliseconds newTime)) (toForm makeImage)
-            ,  rotate (degrees ((inMilliseconds newTime) / 10) + 45) (toForm makeImage) ])
+            ( Model (collage 800 800 [ rotate (degrees ((inMilliseconds newTime) / 2)) (toForm makeImage)
+            ,  rotate (degrees ((inMilliseconds newTime) / 10) + 45) (toForm makeImage2) ])
             , Cmd.none
             )
 
@@ -49,6 +49,10 @@ view model =
 makeImage : Element
 makeImage =
     image 800 800 "http://aikatsup.com/media/images/2157.jpeg"
+
+makeImage2 : Element
+makeImage2 =
+    image 400 400 "http://aikatsup.com/media/images/2151.jpeg"
 
 makeCollage : Float -> Float -> Element
 makeCollage i j =
