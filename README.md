@@ -17,3 +17,7 @@ $ open index.html
 ## Demo
 
 ![](media/danmaku.gif)
+
+![](media/gifsearchengine.gif)
+
+![](media/shwoimage.gif)
