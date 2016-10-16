@@ -8,7 +8,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Json
 import WebSocket
-
+import Keyboard
 
 -- MODEL
 
@@ -26,31 +26,37 @@ type Msg =
     Input String
     | Send
     | Tick Time
+    | KeyMessage Keyboard.KeyCode
+
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
         Input newInput ->
-            ( Model newInput model.database
-            , Cmd.none
-            )
+            Model newInput model.database ! []
+
 
         Send ->
             let
                 newForm = Collage.text (fromString model.input)
             in
-                ( Model model.input (newForm :: model.database)
-                , Cmd.none
-                )
+                Model model.input (newForm :: model.database) ! []
+
 
         Tick newTime ->
             let
                 ms = inMilliseconds newTime
             in
-                ( Model model.input (movedForms ms model.database)
-                , Cmd.none
-                )
+                Model model.input (movedForms ms model.database) ! []
+
+
+        KeyMessage keyCode ->
+            if keyCode == 13 then
+                let newForm = Collage.text (fromString model.input)
+                in Model model.input (newForm :: model.database) ! []
+            else
+                model ! []
 
 
 moveForm : Float -> Form -> Form
@@ -67,13 +73,19 @@ makeImage : Element
 makeImage =
     image 1000 800 "https://media.giphy.com/media/coKVIxlpTXpXq/giphy.gif"
 
+makeVideo : Element
+makeVideo =
+    image 100 800 "https://www.youtube.com/watch?v=Yl1HkrEicgE"
 
 -- SUBSCRIPTIONS
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    every millisecond Tick
+    Sub.batch
+        [ every millisecond Tick
+        , Keyboard.presses KeyMessage
+        ]
 
 
 -- VIEW
