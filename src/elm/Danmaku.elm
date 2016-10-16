@@ -93,7 +93,7 @@ subscriptions model =
 view : Model -> Html Msg
 view model =
     div []
-        [ h1 [] [ text "Elm Danmaku" ]
+        [ h1 [ class "jumbotron"] [ text "Elm Danmaku Animation" ]
         , textField model.input
         , button [ onClick Send ] [ text "Send" ]
         , viewCollage model.database
