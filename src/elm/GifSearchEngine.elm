@@ -60,7 +60,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ h1 [] [ text "Gif Search Engine" ]
+        [ h1 [ class "jumbotron" ] [ text "Gif Search Engine" ]
         , div []
             [ input  [ placeholder "English Only" ,onInput Input, value model.input ] [ ]
             , button [ onClick Send ] [ text "Send" ] ]

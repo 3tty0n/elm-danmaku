@@ -44,7 +44,9 @@ subscriptions model =
 view : Model -> Html Msg
 view model =
     div []
-        [ div [] [ toHtml model.image ]
+        [ div [ ] [
+          h1 [ Html.Attributes.class "jumbotron" ] [ Html.text "Image Rotating Animation"]
+        , toHtml model.image ]
         ]
 
 makeImage : Element
