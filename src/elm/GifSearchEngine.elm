@@ -1,3 +1,5 @@
+module GifSearchEngine exposing (..)
+
 import Html exposing (..)
 import Html.App as App
 import Html.Attributes exposing (..)
@@ -65,11 +67,13 @@ view model =
         , listImage model
         ]
 
+
 listImage model =
     let
         toList a = img [ src a ] []
     in
         div [] <| List.map toList model.gifUrl
+
 
 -- SUBSCRIPTIONS
 

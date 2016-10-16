@@ -1,3 +1,5 @@
+module Danmaku exposing (..)
+
 import Collage exposing (Form, collage, moveX, toForm)
 import Element exposing (..)
 import Time exposing (..)
@@ -73,9 +75,6 @@ makeImage : Element
 makeImage =
     image 1000 800 "https://media.giphy.com/media/coKVIxlpTXpXq/giphy.gif"
 
-makeVideo : Element
-makeVideo =
-    image 100 800 "https://www.youtube.com/watch?v=Yl1HkrEicgE"
 
 -- SUBSCRIPTIONS
 
