@@ -11,8 +11,9 @@ $ elm-package install
 
 ```
 $ elm-make src/<filename>
-$ open index.Html
+$ open index.html
 ```
 
 ## Demo
-![](media/demo.gif)
+
+![](media/danmaku.gif)
