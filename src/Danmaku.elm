@@ -73,9 +73,6 @@ makeImage : Element
 makeImage =
     image 1000 800 "https://media.giphy.com/media/coKVIxlpTXpXq/giphy.gif"
 
-makeVideo : Element
-makeVideo =
-    image 100 800 "https://www.youtube.com/watch?v=Yl1HkrEicgE"
 
 -- SUBSCRIPTIONS
 
