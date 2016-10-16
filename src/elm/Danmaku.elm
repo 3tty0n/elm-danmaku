@@ -1,3 +1,5 @@
+module Danmaku exposing (..)
+
 import Collage exposing (Form, collage, moveX, toForm)
 import Element exposing (..)
 import Time exposing (..)

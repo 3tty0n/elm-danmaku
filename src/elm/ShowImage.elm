@@ -1,3 +1,5 @@
+module ShowImage exposing (..)
+
 import Animation exposing (..)
 import Element exposing (..)
 import Collage exposing (..)
@@ -33,8 +35,7 @@ update msg model =
         Tick newTime ->
             ( Model (collage 800 800 [ rotate (degrees ((inMilliseconds newTime) / 2)) (toForm makeImage)
             ,  rotate (degrees ((inMilliseconds newTime) / 10) + 45) (toForm makeImage2) ])
-            , Cmd.none
-            )
+            , Cmd.none)
 
 subscriptions: Model -> Sub Msg
 subscriptions model =

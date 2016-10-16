@@ -1,3 +1,5 @@
+module GifSearchEngine exposing (..)
+
 import Html exposing (..)
 import Html.App as App
 import Html.Attributes exposing (..)
@@ -64,11 +66,7 @@ view model =
             , button [ onClick Send ] [ text "Send" ] ]
         , listImage model
         ]
-listImage model =
-    let
-        toList a = img [ src a ] []
-    in
-        div [] <| List.map toList model.gifUrl
+
 
 listImage model =
     let
@@ -76,11 +74,6 @@ listImage model =
     in
         div [] <| List.map toList model.gifUrl
 
-listImage model =
-    let
-        toList a = img [ src a ] []
-    in
-        div [] <| List.map toList model.gifUrl
 
 -- SUBSCRIPTIONS
 
